@@ -1,8 +1,8 @@
 {
   "name": "@raxbkdn/admin-systeem",
-  
+
   "private": false,
-  "version": "1.0.0",
+  "version": "1.0.8",
   "type": "module",
   "scripts": {
     "dev": "vite",
