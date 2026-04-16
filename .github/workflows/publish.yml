@@ -35,8 +35,3 @@ jobs:
       - name: Run tests
         run: npm run test || echo "Tests skipped"
 
-      # 第5步：正式发布到 NPM
-      - name: Publish to NPM
-        run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
