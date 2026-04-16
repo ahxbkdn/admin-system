@@ -1,0 +1,36 @@
+{
+  "courses": [
+    {
+      "id": "1",
+      "title": "后端开发实战",
+      "teacher": "李老师",
+      "totalHours": 40,
+      "description": "本课程介绍后端开发的核心技术...",
+      "price": 299,
+      "category": "backend",
+      "status": "published",
+      "cover": "http://example.com/cover.jpg",
+      "createTime": "2026-03-23 10:00:00"
+    }
+  ],
+  "chapters": [
+    {
+      "id": "1",
+      "courseId": "1",
+      "title": "第一章 环境搭建",
+      "sort": 1,
+      "createTime": "2026-03-23 10:00:00"
+    }
+  ],
+  "sections": [
+    {
+      "id": "1-1",
+      "chapterId": "1",
+      "title": "第1节 DevEcoStudio安装",
+      "sort": 1,
+      "isFree": true,
+      "videoUrl": "http://example.com/video1.mp4",
+      "createTime": "2026-03-23 10:00:00"
+    }
+  ]
+}

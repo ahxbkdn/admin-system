@@ -1,0 +1,926 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "课程管理",
+    "description": "课程管理系统后端接口文档",
+    "contact": {
+      "name": "API Support",
+      "email": "support@example.com"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://47.113.230.113:8001",
+      "description": "Generated server url"
+    }
+  ],
+  "security": [
+    {
+      "bearer-jwt": []
+    }
+  ],
+  "paths": {
+    "/courses": {
+      "post": {
+        "summary": "创建课程",
+        "description": "添加新课程",
+        "tags": ["课程管理"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "description": "课程标题"
+                  },
+                  "teacher": {
+                    "type": "string",
+                    "description": "课程主讲老师"
+                  },
+                  "totalHours": {
+                    "type": "number",
+                    "description": "总课时"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "课程简介"
+                  },
+                  "price": {
+                    "type": "number",
+                    "description": "课程价格"
+                  },
+                  "category": {
+                    "type": "string",
+                    "description": "课程分类"
+                  },
+                  "status": {
+                    "type": "string",
+                    "description": "课程状态（draft/published/offline）"
+                  },
+                  "cover": {
+                    "type": "string",
+                    "description": "课程封面图URL"
+                  }
+                },
+                "required": [
+                  "title",
+                  "teacher",
+                  "totalHours",
+                  "description",
+                  "price",
+                  "category",
+                  "status"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "操作成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Course"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "获取课程列表",
+        "description": "获取课程分页列表",
+        "tags": ["课程管理"],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "页码，默认1"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "每页数量，默认10"
+          },
+          {
+            "name": "title",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "课程标题搜索"
+          },
+          {
+            "name": "teacher",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "老师名称搜索"
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "课程分类搜索"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "课程状态搜索"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "操作成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "records": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Course"
+                          }
+                        },
+                        "total": {
+                          "type": "integer"
+                        },
+                        "size": {
+                          "type": "integer"
+                        },
+                        "current": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/courses/{id}": {
+      "get": {
+        "summary": "获取课程详情",
+        "description": "根据ID获取课程详情",
+        "tags": ["课程管理"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "课程ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "操作成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Course"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "更新课程",
+        "description": "更新课程信息",
+        "tags": ["课程管理"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "课程ID"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "description": "课程标题"
+                  },
+                  "teacher": {
+                    "type": "string",
+                    "description": "课程主讲老师"
+                  },
+                  "totalHours": {
+                    "type": "number",
+                    "description": "总课时"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "课程简介"
+                  },
+                  "price": {
+                    "type": "number",
+                    "description": "课程价格"
+                  },
+                  "category": {
+                    "type": "string",
+                    "description": "课程分类"
+                  },
+                  "status": {
+                    "type": "string",
+                    "description": "课程状态（draft/published/offline）"
+                  },
+                  "cover": {
+                    "type": "string",
+                    "description": "课程封面图URL"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "操作成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Course"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "删除课程",
+        "description": "根据ID删除课程",
+        "tags": ["课程管理"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "课程ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "操作成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/courses/{courseId}/chapters": {
+      "post": {
+        "summary": "添加章节",
+        "description": "为课程添加章节",
+        "tags": ["章节管理"],
+        "parameters": [
+          {
+            "name": "courseId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "课程ID"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "description": "章节标题"
+                  },
+                  "sort": {
+                    "type": "number",
+                    "description": "章节排序"
+                  }
+                },
+                "required": [
+                  "title"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "操作成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Chapter"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "获取章节列表",
+        "description": "获取课程的章节列表（包含小节）",
+        "tags": ["章节管理"],
+        "parameters": [
+          {
+            "name": "courseId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "课程ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "操作成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ChapterWithSections"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/chapters/{id}": {
+      "put": {
+        "summary": "更新章节",
+        "description": "更新章节信息",
+        "tags": ["章节管理"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "章节ID"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "description": "章节标题"
+                  },
+                  "sort": {
+                    "type": "number",
+                    "description": "章节排序"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "操作成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Chapter"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "删除章节",
+        "description": "根据ID删除章节",
+        "tags": ["章节管理"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "章节ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "操作成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/chapters/{chapterId}/sections": {
+      "post": {
+        "summary": "添加小节",
+        "description": "为章节添加小节",
+        "tags": ["小节管理"],
+        "parameters": [
+          {
+            "name": "chapterId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "章节ID"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "description": "课时名称"
+                  },
+                  "sort": {
+                    "type": "number",
+                    "description": "课时排序"
+                  },
+                  "isFree": {
+                    "type": "boolean",
+                    "description": "是否免费"
+                  },
+                  "videoUrl": {
+                    "type": "string",
+                    "description": "视频"
+                  }
+                },
+                "required": [
+                  "title",
+                  "isFree"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "操作成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Section"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sections/{id}": {
+      "put": {
+        "summary": "更新小节",
+        "description": "更新小节信息",
+        "tags": ["小节管理"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "小节ID"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "description": "课时名称"
+                  },
+                  "sort": {
+                    "type": "number",
+                    "description": "课时排序"
+                  },
+                  "isFree": {
+                    "type": "boolean",
+                    "description": "是否免费"
+                  },
+                  "videoUrl": {
+                    "type": "string",
+                    "description": "视频"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "操作成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Section"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "删除小节",
+        "description": "根据ID删除小节",
+        "tags": ["小节管理"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "小节ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "操作成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/upload": {
+      "post": {
+        "summary": "上传文件",
+        "description": "上传课程封面或视频文件",
+        "tags": ["文件上传"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "要上传的文件"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "操作成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "url": {
+                          "type": "string",
+                          "description": "上传文件的URL"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearer-jwt": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "description": "输入JWT令牌"
+      }
+    },
+    "schemas": {
+      "Course": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "teacher": {
+            "type": "string"
+          },
+          "totalHours": {
+            "type": "number"
+          },
+          "description": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number"
+          },
+          "category": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "cover": {
+            "type": "string"
+          },
+          "createTime": {
+            "type": "string"
+          },
+          "updateTime": {
+            "type": "string"
+          }
+        }
+      },
+      "Chapter": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "courseId": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "sort": {
+            "type": "number"
+          },
+          "createTime": {
+            "type": "string"
+          },
+          "updateTime": {
+            "type": "string"
+          }
+        }
+      },
+      "ChapterWithSections": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Chapter"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Section"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "Section": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "chapterId": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "sort": {
+            "type": "number"
+          },
+          "isFree": {
+            "type": "boolean"
+          },
+          "videoUrl": {
+            "type": "string"
+          },
+          "createTime": {
+            "type": "string"
+          },
+          "updateTime": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

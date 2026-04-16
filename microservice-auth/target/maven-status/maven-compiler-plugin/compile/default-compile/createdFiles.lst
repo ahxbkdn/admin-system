@@ -1,0 +1,17 @@
+com\example\auth\entity\RolePermission.class
+com\example\auth\security\JwtAuthorizationFilter.class
+com\example\auth\entity\User.class
+com\example\auth\mapper\PermissionMapper.class
+com\example\auth\service\UserService.class
+com\example\auth\security\UserDetailsServiceImpl.class
+com\example\auth\security\JwtAuthenticationFilter.class
+com\example\auth\mapper\UserMapper.class
+com\example\auth\security\CustomGrantedAuthority.class
+com\example\auth\service\impl\UserServiceImpl.class
+com\example\auth\config\SecurityConfig.class
+com\example\auth\entity\UserRole.class
+com\example\auth\mapper\RoleMapper.class
+com\example\auth\controller\AuthController.class
+com\example\auth\entity\Role.class
+com\example\auth\AuthApplication.class
+com\example\auth\entity\Permission.class

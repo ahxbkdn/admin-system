@@ -1,0 +1,18 @@
+# 课程管理API文档访问URL
+
+您可以通过以下URL访问课程管理API文档：
+
+http://47.113.230.113:8001/swagger-ui/index.html?url=https://raw.githubusercontent.com/user/repo/main/course-management-api.json
+
+## 部署步骤
+
+1. 将 `course-management-api.json` 文件上传到一个公开可访问的位置，例如 GitHub Gist 或其他文件托管服务
+2. 复制文件的原始URL
+3. 将URL替换到上面的链接中
+4. 访问修改后的URL，即可在服务器的Swagger UI中查看课程管理API文档
+
+## 本地测试
+
+您也可以通过以下URL在本地测试：
+
+http://localhost:8000/swagger-ui/index.html?url=course-management-api.json

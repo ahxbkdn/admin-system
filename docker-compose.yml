@@ -1,0 +1,97 @@
+version: '3.8'
+
+services:
+  # MySQL 数据库
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-db
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: auth_db
+    volumes:
+      - ./mysql-data:/var/lib/mysql
+      - ./db-init.sql:/docker-entrypoint-initdb.d/db-init.sql
+    networks:
+      - microservice-network
+
+  # Eureka 注册中心
+  eureka:
+    build: ./microservice-eureka
+    container_name: microservice-eureka
+    ports:
+      - "8761:8761"
+    networks:
+      - microservice-network
+
+  # 网关服务
+  gateway:
+    build: ./microservice-gateway
+    container_name: microservice-gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - eureka
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka/
+    networks:
+      - microservice-network
+
+  # 认证服务
+  auth-service:
+    build: ./microservice-auth
+    container_name: microservice-auth
+    depends_on:
+      - eureka
+      - mysql
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka/
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/auth_db?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+    networks:
+      - microservice-network
+
+  # 课程服务
+  course-service:
+    build: ./microservice-course
+    container_name: microservice-course
+    depends_on:
+      - eureka
+      - mysql
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka/
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/course_db?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+    networks:
+      - microservice-network
+
+  # AI服务
+  ai-service:
+    build: ./microservice-ai
+    container_name: microservice-ai
+    depends_on:
+      - eureka
+      - mysql
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka/
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/ai_db?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+    networks:
+      - microservice-network
+
+  # 轮播图服务
+  banner-service:
+    build: ./microservice-banner
+    container_name: microservice-banner
+    depends_on:
+      - eureka
+      - mysql
+    ports:
+      - "8086:8086"
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka/
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/admin_system?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+    networks:
+      - microservice-network
+
+networks:
+  microservice-network:
+    driver: bridge

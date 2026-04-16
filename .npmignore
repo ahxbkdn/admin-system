@@ -1,0 +1,30 @@
+# 依赖目录（绝对不要上传）
+node_modules/
+# 静态资源/上传目录（体积元凶，必须加）
+uploads/
+# Git相关
+.git/
+# IDE配置
+.vscode/
+.idea/
+# 环境变量
+.env
+.env.local
+.env.test
+# 日志文件
+*.log
+app.log
+# 本地打包产物
+*.tgz
+# 构建缓存
+.cache/
+# 测试目录
+__tests__/
+# 系统文件
+.DS_Store
+Thumbs.db
+# 构建产物（不需要发布就加上）
+dist/
+build/
+# 其他冗余文件
+*.py

@@ -1,0 +1,17 @@
+C:\Users\Lenovo\Desktop\admin-system\microservice-auth\src\main\java\com\example\auth\security\CustomGrantedAuthority.java
+C:\Users\Lenovo\Desktop\admin-system\microservice-auth\src\main\java\com\example\auth\config\SecurityConfig.java
+C:\Users\Lenovo\Desktop\admin-system\microservice-auth\src\main\java\com\example\auth\entity\UserRole.java
+C:\Users\Lenovo\Desktop\admin-system\microservice-auth\src\main\java\com\example\auth\AuthApplication.java
+C:\Users\Lenovo\Desktop\admin-system\microservice-auth\src\main\java\com\example\auth\entity\Role.java
+C:\Users\Lenovo\Desktop\admin-system\microservice-auth\src\main\java\com\example\auth\mapper\UserMapper.java
+C:\Users\Lenovo\Desktop\admin-system\microservice-auth\src\main\java\com\example\auth\security\JwtAuthenticationFilter.java
+C:\Users\Lenovo\Desktop\admin-system\microservice-auth\src\main\java\com\example\auth\controller\AuthController.java
+C:\Users\Lenovo\Desktop\admin-system\microservice-auth\src\main\java\com\example\auth\mapper\PermissionMapper.java
+C:\Users\Lenovo\Desktop\admin-system\microservice-auth\src\main\java\com\example\auth\entity\User.java
+C:\Users\Lenovo\Desktop\admin-system\microservice-auth\src\main\java\com\example\auth\entity\RolePermission.java
+C:\Users\Lenovo\Desktop\admin-system\microservice-auth\src\main\java\com\example\auth\mapper\RoleMapper.java
+C:\Users\Lenovo\Desktop\admin-system\microservice-auth\src\main\java\com\example\auth\service\impl\UserServiceImpl.java
+C:\Users\Lenovo\Desktop\admin-system\microservice-auth\src\main\java\com\example\auth\service\UserService.java
+C:\Users\Lenovo\Desktop\admin-system\microservice-auth\src\main\java\com\example\auth\security\UserDetailsServiceImpl.java
+C:\Users\Lenovo\Desktop\admin-system\microservice-auth\src\main\java\com\example\auth\entity\Permission.java
+C:\Users\Lenovo\Desktop\admin-system\microservice-auth\src\main\java\com\example\auth\security\JwtAuthorizationFilter.java
