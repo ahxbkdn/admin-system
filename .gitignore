@@ -158,3 +158,22 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 >>>>>>> 086483ca27af4a0975931ef8a7127d1968f3e9d2
+# 忽略所有 target 目录下的 jar 包（编译产物）
+**/target/*.jar
+**/target/
+
+# 忽略压缩包（你报错的 tgz 就在这里）
+*.tgz
+*.zip
+*.rar
+*.7z
+
+# 忽略其他不需要传的文件
+*.class
+*.log
+*.tmp
+/node_modules/
+/dist/
+/build/
+.idea/
+.vscode/
