@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: microservice-auth
+  datasource:
+    url: jdbc:mysql://localhost:3306/auth_db?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  cloud:
+    config:
+      enabled: false
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/**/*.xml
+  type-aliases-package: com.example.auth.entity
+  global-config:
+    db-config:
+      id-type: auto
+
+server:
+  port: 8081
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
